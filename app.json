@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "lead-opentrivia",
+    "slug": "lead-opentrivia",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "lead-opentrivia"
+}
