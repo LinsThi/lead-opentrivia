@@ -1,6 +1,10 @@
 import { useNavigation } from '@react-navigation/core';
-import React from 'react';
-import { Text } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { ThemeContext } from 'styled-components/native';
+
+import { Button } from '~/components/Button';
+import Input from '~/components/InputLogin';
+import { NewText } from '~/components/Text';
 
 import { HOME_SCREEN } from '~/constants/routes';
 
@@ -8,6 +12,11 @@ import * as S from './styles';
 
 export function Login() {
   const navigation = useNavigation();
+  const { Colors } = useContext(ThemeContext);
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleNavigationHome() {
     navigation.navigate(HOME_SCREEN);
@@ -24,18 +33,30 @@ export function Login() {
       </S.ContainerImage>
 
       <S.ContainerInput>
-        <S.InputLogin
+        <Input
           placeholder="Username"
-          style={{ borderBottomWidth: 1, marginBottom: 15 }}
+          iconLeft="person"
+          iconType="ionicons"
+          value={username}
+          onChangeText={setUsername}
         />
-
-        <S.InputLogin placeholder="Senha" style={{ borderBottomWidth: 1 }} />
+        <Input
+          placeholder="Password"
+          iconLeft="lock"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+          iconAction={() => setShowPassword(!showPassword)}
+          iconRight={showPassword ? 'eye-off' : 'eye'}
+        />
       </S.ContainerInput>
 
       <S.ContainerButton>
-        <S.ButtonLogin onPress={() => handleNavigationHome()}>
-          <S.TextButton>Entrar</S.TextButton>
-        </S.ButtonLogin>
+        <Button
+          title="Entrar"
+          onPress={() => handleNavigationHome()}
+          color={Colors.BUTTON_COLOR}
+        />
       </S.ContainerButton>
     </S.Container>
   );
