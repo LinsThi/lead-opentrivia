@@ -30,7 +30,12 @@ export const InputLogin = styled.TextInput`
 export const ButtonLogin = styled.TouchableOpacity`
   width: 200px;
   height: 50px;
-  background: #4169e1;
+  background: ${({ theme }) => theme.Colors.BLUE};
   justify-content: center;
   align-items: center;
+`;
+
+export const TextButton = styled.Text`
+  font-size: ${({ theme }) => theme.Sizes.FONTSIZE_TEXT}px;
+  color: ${({ theme }) => theme.Colors.WHITE};
 `;
