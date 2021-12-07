@@ -34,7 +34,7 @@ export function Login() {
 
       <S.ContainerButton>
         <S.ButtonLogin onPress={() => handleNavigationHome()}>
-          <Text>Entrar</Text>
+          <S.TextButton>Entrar</S.TextButton>
         </S.ButtonLogin>
       </S.ContainerButton>
     </S.Container>
