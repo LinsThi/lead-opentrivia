@@ -22,11 +22,6 @@ export const ImageLogo = styled.Image`
   height: 200px;
 `;
 
-export const InputLogin = styled.TextInput`
-  width: 200px;
-  height: 50px;
-`;
-
 export const ButtonLogin = styled.TouchableOpacity`
   width: 200px;
   height: 50px;
