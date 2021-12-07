@@ -1,7 +1,10 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ThemeContext } from 'styled-components/native';
 
+import { Button } from '~/components/Button';
 import Input from '~/components/InputLogin';
+import { NewText } from '~/components/Text';
 
 import { HOME_SCREEN } from '~/constants/routes';
 
@@ -9,6 +12,7 @@ import * as S from './styles';
 
 export function Login() {
   const navigation = useNavigation();
+  const { Colors } = useContext(ThemeContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -48,9 +52,11 @@ export function Login() {
       </S.ContainerInput>
 
       <S.ContainerButton>
-        <S.ButtonLogin onPress={() => handleNavigationHome()}>
-          <S.TextButton>Entrar</S.TextButton>
-        </S.ButtonLogin>
+        <Button
+          title="Entrar"
+          onPress={() => handleNavigationHome()}
+          color={Colors.BUTTON_COLOR}
+        />
       </S.ContainerButton>
     </S.Container>
   );
