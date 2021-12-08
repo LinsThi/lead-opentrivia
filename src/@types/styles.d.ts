@@ -11,6 +11,7 @@ type ColorProps = {
   BORDER_BUTTON_COLOR: string;
   FONT_COLOR: string;
   ICON_COLOR: string;
+  ICON_COLOR_INPUT: string;
   HEADER_COLOR: string;
 };
 

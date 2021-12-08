@@ -40,7 +40,7 @@ export const IconInput = styled(Icon).attrs<IconInputProps>(
   ({ name, iconType, theme }) => ({
     name,
     type: iconType,
-    color: theme.Colors.ICON_COLOR,
+    color: theme.Colors.ICON_COLOR_INPUT,
     size: theme.Sizes.ICON_SIZE,
   }),
 )<IconInputProps>``;
