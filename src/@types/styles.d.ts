@@ -11,6 +11,7 @@ type ColorProps = {
   BORDER_BUTTON_COLOR: string;
   FONT_COLOR: string;
   ICON_COLOR: string;
+  HEADER_COLOR: string;
 };
 
 type SizeProps = {

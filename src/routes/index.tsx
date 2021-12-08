@@ -6,6 +6,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components/native';
 
+import { Header } from '~/components/Header';
+
 import type { AplicationState } from '~/@types/Entity/AplicationState';
 import { HOME_SCREEN, LOGIN_SCREEN } from '~/constants/routes';
 import { Home } from '~/screens/Home';
@@ -27,20 +29,22 @@ export function RootStack() {
       >
         <ThemeProvider theme={createTheme(theme)}>
           <NavigationContainer>
-            <Stack.Navigator
-              initialRouteName={LOGIN_SCREEN}
-              screenOptions={{
-                gestureEnabled: false,
-                animationEnabled: false,
-              }}
-            >
+            <Stack.Navigator initialRouteName={LOGIN_SCREEN}>
               <Stack.Screen
                 name={LOGIN_SCREEN}
                 component={Login}
-                options={{ headerShown: false }}
+                options={{
+                  header: props => <Header {...props} headerLogin />,
+                }}
               />
 
-              <Stack.Screen name={HOME_SCREEN} component={Home} />
+              <Stack.Screen
+                name={HOME_SCREEN}
+                component={Home}
+                options={{
+                  header: props => <Header {...props} enableNavigation />,
+                }}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </ThemeProvider>

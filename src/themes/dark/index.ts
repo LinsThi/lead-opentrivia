@@ -10,6 +10,7 @@ export default {
     BORDER_BUTTON_COLOR: '#FFFF00',
     FONT_COLOR: '#FFFF00',
     ICON_COLOR: '#FFFF00',
+    HEADER_COLOR: '#000000',
   },
 
   Sizes: {
