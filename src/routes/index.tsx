@@ -9,9 +9,10 @@ import { ThemeProvider } from 'styled-components/native';
 import { Header } from '~/components/Header';
 
 import type { AplicationState } from '~/@types/Entity/AplicationState';
-import { HOME_SCREEN, LOGIN_SCREEN } from '~/constants/routes';
+import { HOME_SCREEN, LOGIN_SCREEN, PROFILE_SCREEN } from '~/constants/routes';
 import { Home } from '~/screens/Home';
 import { Login } from '~/screens/Login';
+import { Profile } from '~/screens/Profile';
 
 import { createTheme } from './utils';
 
@@ -41,6 +42,14 @@ export function RootStack() {
               <Stack.Screen
                 name={HOME_SCREEN}
                 component={Home}
+                options={{
+                  header: props => <Header {...props} enableNavigation />,
+                }}
+              />
+
+              <Stack.Screen
+                name={PROFILE_SCREEN}
+                component={Profile}
                 options={{
                   header: props => <Header {...props} enableNavigation />,
                 }}
