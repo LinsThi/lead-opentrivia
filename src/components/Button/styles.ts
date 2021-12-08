@@ -15,4 +15,5 @@ export const ButtonLogin = styled.TouchableOpacity<ButtonProps>`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  border: 1px ${({ theme }) => theme.Colors.BORDER_BUTTON_COLOR};
 `;

@@ -5,20 +5,22 @@ import Icon from '../Icon';
 interface IconInputProps {
   name: string;
   iconType?: string;
-  iconColor?: string;
 }
 
 interface TextInputProps {
   iconRight?: string;
 }
 
-export const InputWrapper = styled.View``;
+export const InputWrapper = styled.View`
+  margin-bottom: 10px;
+`;
 
 export const ContainerInputIcon = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: ${({ theme }) => theme.Colors.BACKGROUND};
+  border: 1px ${({ theme }) => theme.Colors.BORDER_BUTTON_COLOR};
   border-radius: 14px;
   padding-left: 15px;
 `;
@@ -35,10 +37,10 @@ export const ContainerInput = styled.View`
 `;
 
 export const IconInput = styled(Icon).attrs<IconInputProps>(
-  ({ name, iconType, iconColor, theme }) => ({
+  ({ name, iconType, theme }) => ({
     name,
     type: iconType,
-    color: iconColor,
+    color: theme.Colors.ICON_COLOR,
     size: theme.Sizes.ICON_SIZE,
   }),
 )<IconInputProps>``;
@@ -47,6 +49,7 @@ export const InputLogin = styled.TextInput<TextInputProps>`
   width: ${({ iconRight }) => (iconRight ? 90 : 100)}%;
   padding-right: 10px;
   height: 53px;
+  color: ${({ theme }) => theme.Colors.INPUT_TEXT_COLOR};
 `;
 
 export const Button = styled.TouchableOpacity``;

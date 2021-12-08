@@ -4,18 +4,22 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background: ${({ theme }) => theme.Colors.BACKGROUND};
 `;
 
 export const ContainerImage = styled.View`
-  flex: 0.35;
+  flex: 0.4;
 `;
 
 export const ContainerInput = styled.View`
-  flex: 0.25;
+  flex: 0.2;
   align-items: center;
 `;
 
-export const ContainerButton = styled.View``;
+export const ContainerButton = styled.View`
+  flex: 0.2;
+  margin-top: 40px;
+`;
 
 export const ImageLogo = styled.Image`
   width: 200px;

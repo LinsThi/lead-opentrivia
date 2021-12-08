@@ -3,8 +3,13 @@ export default {
     WHITE: '#FFFFFF',
     BLACK: '#000000',
     BLUE: '#0076ce',
+    BACKGROUND: '#FFFFFF',
+    INPUT_TEXT_COLOR: '#000000',
+    PLACEHOLDER_COLOR: '#A5A5A5',
     BUTTON_COLOR: '#0076ce',
+    BORDER_BUTTON_COLOR: '#0076ce',
     FONT_COLOR: '#FFFFFF',
+    ICON_COLOR: '#000000',
   },
 
   Sizes: {
