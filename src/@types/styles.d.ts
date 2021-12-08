@@ -4,8 +4,13 @@ type ColorProps = {
   WHITE: string;
   BLACK: string;
   BLUE: string;
+  BACKGROUND: string;
+  INPUT_TEXT_COLOR: string;
+  PLACEHOLDER_COLOR: string;
   BUTTON_COLOR: string;
+  BORDER_BUTTON_COLOR: string;
   FONT_COLOR: string;
+  ICON_COLOR: string;
 };
 
 type SizeProps = {

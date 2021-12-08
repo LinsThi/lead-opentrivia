@@ -1,17 +1,20 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
 
 import { Button } from '~/components/Button';
 import Input from '~/components/InputLogin';
-import { NewText } from '~/components/Text';
 
 import { HOME_SCREEN } from '~/constants/routes';
+import { toogleThemeAction } from '~/store/ducks/themes/action';
 
 import * as S from './styles';
 
 export function Login() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const { Colors } = useContext(ThemeContext);
 
   const [username, setUsername] = useState('');
@@ -35,6 +38,7 @@ export function Login() {
       <S.ContainerInput>
         <Input
           placeholder="Username"
+          placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="person"
           iconType="ionicons"
           value={username}
@@ -42,6 +46,7 @@ export function Login() {
         />
         <Input
           placeholder="Password"
+          placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="lock"
           value={password}
           onChangeText={setPassword}
