@@ -9,7 +9,8 @@ export default {
     BUTTON_COLOR: '#8967C7',
     BORDER_BUTTON_COLOR: '#8967C7',
     FONT_COLOR: '#FFFFFF',
-    ICON_COLOR: '#000000',
+    ICON_COLOR_INPUT: '#8967C7',
+    ICON_COLOR: '#FFFFFF',
     HEADER_COLOR: '#8967C7',
   },
 
