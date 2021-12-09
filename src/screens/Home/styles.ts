@@ -15,7 +15,7 @@ export const ContainerCategory = styled.View`
 
   margin: 7px 20px;
   border-radius: 7px;
-  background: ${({ theme }) => theme.Colors.HEADER_COLOR};
+  background: ${({ theme }) => theme.Colors.BUTTON_COLOR};
   border: 1px ${({ theme }) => theme.Colors.BORDER_BUTTON_COLOR};
 `;
 

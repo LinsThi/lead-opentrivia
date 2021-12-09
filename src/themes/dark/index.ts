@@ -11,7 +11,7 @@ export default {
     FONT_COLOR: '#FFFF00',
     ICON_COLOR_INPUT: '#FFFF00',
     ICON_COLOR: '#FFFF00',
-    HEADER_COLOR: '#000000',
+    HEADER_COLOR: '#333333',
   },
 
   Sizes: {
