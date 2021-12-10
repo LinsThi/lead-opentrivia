@@ -10,9 +10,13 @@ type ColorProps = {
   BUTTON_COLOR: string;
   BORDER_BUTTON_COLOR: string;
   FONT_COLOR: string;
+  FONT_RESULT_COLOR: string;
   ICON_COLOR: string;
   ICON_COLOR_INPUT: string;
   HEADER_COLOR: string;
+  RESULT_BOX_COLOR: string;
+  CONGRATS_COLOR: string;
+  FAILED_COLOR: string;
 };
 
 type SizeProps = {
