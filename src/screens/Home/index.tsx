@@ -15,8 +15,6 @@ export function Home() {
 
   useEffect(() => {
     navigation.setOptions({
-      iconLeftType: 'antDesign',
-      iconLeftName: 'arrowleft',
       title: 'Bem-Vinda Mayh',
     });
   }, [navigation]);
