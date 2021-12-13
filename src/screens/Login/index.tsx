@@ -8,6 +8,7 @@ import Input from '~/components/InputLogin';
 
 import { HOME_SCREEN } from '~/constants/routes';
 import { toogleThemeAction } from '~/store/ducks/themes/action';
+import { loginAction } from '~/store/ducks/user/action';
 
 import * as S from './styles';
 
@@ -22,7 +23,7 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   function handleNavigationHome() {
-    navigation.navigate(HOME_SCREEN);
+    dispatch(loginAction(username, password));
   }
 
   return (

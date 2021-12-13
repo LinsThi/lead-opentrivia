@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -22,7 +21,6 @@ export function Header({
   options,
 }: HeaderProps) {
   const dispatch = useDispatch();
-  // const navigation = useNavigation();
 
   return (
     <S.Container>

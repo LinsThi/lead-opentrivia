@@ -1,20 +1,23 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   LOGIN_SCREEN,
   PROFILE_SCREEN,
   RESULT_SCREEN,
 } from '~/constants/routes';
+import { logoutAction } from '~/store/ducks/user/action';
 
 import * as S from './styles';
 
 export function Baseboard() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleLogout = useCallback(() => {
-    navigation.navigate(LOGIN_SCREEN);
-  }, [navigation]);
+    dispatch(logoutAction());
+  }, [dispatch]);
 
   const handleNavigateResultUser = useCallback(() => {
     navigation.navigate(RESULT_SCREEN);
