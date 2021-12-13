@@ -17,8 +17,7 @@ export function Baseboard() {
 
   const handleLogout = useCallback(() => {
     dispatch(logoutAction());
-    navigation.navigate(LOGIN_SCREEN);
-  }, [navigation, dispatch]);
+  }, [dispatch]);
 
   const handleNavigateResultUser = useCallback(() => {
     navigation.navigate(RESULT_SCREEN);

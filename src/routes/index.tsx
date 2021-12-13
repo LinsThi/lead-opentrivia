@@ -23,9 +23,11 @@ import { Result } from '~/screens/Result';
 import { createTheme } from './utils';
 
 const Stack = createStackNavigator();
+const StackLogin = createStackNavigator();
 
 export function RootStack() {
   const { theme } = useSelector((state: AplicationState) => state.theme);
+  const { isLogged } = useSelector((state: AplicationState) => state.user);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -36,39 +38,43 @@ export function RootStack() {
       >
         <ThemeProvider theme={createTheme(theme)}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName={LOGIN_SCREEN}>
-              <Stack.Screen
-                name={LOGIN_SCREEN}
-                component={Login}
-                options={{
-                  header: props => <Header {...props} headerLogin />,
-                }}
-              />
+            {isLogged ? (
+              <Stack.Navigator initialRouteName={HOME_SCREEN}>
+                <Stack.Screen
+                  name={HOME_SCREEN}
+                  component={Home}
+                  options={{
+                    header: props => <Header {...props} />,
+                  }}
+                />
 
-              <Stack.Screen
-                name={HOME_SCREEN}
-                component={Home}
-                options={{
-                  header: props => <Header {...props} />,
-                }}
-              />
+                <Stack.Screen
+                  name={PROFILE_SCREEN}
+                  component={Profile}
+                  options={{
+                    header: props => <Header {...props} enableNavigation />,
+                  }}
+                />
 
-              <Stack.Screen
-                name={PROFILE_SCREEN}
-                component={Profile}
-                options={{
-                  header: props => <Header {...props} enableNavigation />,
-                }}
-              />
-
-              <Stack.Screen
-                name={RESULT_SCREEN}
-                component={Result}
-                options={{
-                  header: props => <Header {...props} enableNavigation />,
-                }}
-              />
-            </Stack.Navigator>
+                <Stack.Screen
+                  name={RESULT_SCREEN}
+                  component={Result}
+                  options={{
+                    header: props => <Header {...props} enableNavigation />,
+                  }}
+                />
+              </Stack.Navigator>
+            ) : (
+              <StackLogin.Navigator initialRouteName={LOGIN_SCREEN}>
+                <StackLogin.Screen
+                  name={LOGIN_SCREEN}
+                  component={Login}
+                  options={{
+                    header: props => <Header {...props} headerLogin />,
+                  }}
+                />
+              </StackLogin.Navigator>
+            )}
           </NavigationContainer>
         </ThemeProvider>
       </KeyboardAvoidingView>

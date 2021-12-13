@@ -20,7 +20,7 @@ export function Home() {
 
   useEffect(() => {
     navigation.setOptions({
-      title: `Bem-Vinda ${username}`,
+      title: `Bem-vindo(a) ${username}`,
     });
   }, [navigation, username]);
 

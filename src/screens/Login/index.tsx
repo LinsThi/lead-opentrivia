@@ -24,7 +24,6 @@ export function Login() {
 
   function handleNavigationHome() {
     dispatch(loginAction(username, password));
-    navigation.navigate(HOME_SCREEN);
   }
 
   return (
