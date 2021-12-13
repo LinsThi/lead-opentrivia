@@ -9,39 +9,57 @@ import * as S from './styles';
 
 interface HeaderProps {
   enableNavigation?: boolean;
-  headerLogin?: boolean;
   navigation: any;
   options: any;
+  headerLogin?: boolean;
 }
 
 export function Header({
   enableNavigation,
-  headerLogin = false,
   navigation,
   options,
+  headerLogin = false,
 }: HeaderProps) {
   const dispatch = useDispatch();
 
   return (
     <S.Container>
-      {enableNavigation && (
-        <S.ButtonLeft onPress={() => navigation.goBack()}>
-          <S.IconLeft
-            iconType={options.iconLeftType}
-            name={options.iconLeftName}
-          />
-        </S.ButtonLeft>
-      )}
-
-      <S.ContainerTitle enableNavigation={enableNavigation}>
-        <NewText>{options.title}</NewText>
-      </S.ContainerTitle>
-
-      <S.ContainerButtons headerLogin={headerLogin}>
+      <S.ContainerButtons>
         <S.ButtonTheme onPress={() => dispatch(toogleThemeAction())}>
           <S.IconButton name="invert-colors" />
         </S.ButtonTheme>
+
+        <S.ContainerFont>
+          <S.ButtonTheme onPress={() => console.log('Diminui')}>
+            <S.DecreaseIncreaseFont>A-</S.DecreaseIncreaseFont>
+          </S.ButtonTheme>
+
+          <S.ButtonTheme onPress={() => console.log('Normal')}>
+            <S.RestoreFont>A</S.RestoreFont>
+          </S.ButtonTheme>
+
+          <S.ButtonTheme onPress={() => console.log('Aumenta')}>
+            <S.DecreaseIncreaseFont>A+</S.DecreaseIncreaseFont>
+          </S.ButtonTheme>
+        </S.ContainerFont>
       </S.ContainerButtons>
+
+      {!headerLogin && (
+        <S.ContainerHeaderDown>
+          {enableNavigation && (
+            <S.ButtonLeft onPress={() => navigation.goBack()}>
+              <S.IconLeft
+                iconType={options.iconLeftType}
+                name={options.iconLeftName}
+              />
+            </S.ButtonLeft>
+          )}
+
+          <S.ContainerTitle enableNavigation={enableNavigation}>
+            <NewText>{options.title}</NewText>
+          </S.ContainerTitle>
+        </S.ContainerHeaderDown>
+      )}
     </S.Container>
   );
 }
