@@ -1,23 +1,28 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Baseboard } from '~/components/Baseboard';
 import { NewText } from '~/components/Text';
+
+import type { AplicationState } from '~/@types/Entity/AplicationState';
 
 import { listQuestions } from './mock';
 
 import * as S from './styles';
 
 export function Home() {
+  const { username } = useSelector((state: AplicationState) => state.user);
+
   const navigation = useNavigation();
   const [numbColumns, setNumbColumns] = useState(2);
   const [categorySelected, setCategorySelected] = useState('');
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Bem-Vinda Mayh',
+      title: `Bem-Vinda ${username}`,
     });
-  }, [navigation]);
+  }, [navigation, username]);
 
   const handleSelectCategory = useCallback((category: string) => {
     setCategorySelected(category);
