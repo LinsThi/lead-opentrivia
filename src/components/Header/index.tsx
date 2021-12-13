@@ -26,7 +26,7 @@ export function Header({
     <S.Container>
       <S.ContainerButtons>
         <S.ButtonTheme onPress={() => dispatch(toogleThemeAction())}>
-          <S.IconButton name="invert-colors" />
+          <S.IconButton iconType="font" name="adjust" />
         </S.ButtonTheme>
 
         <S.ContainerFont>

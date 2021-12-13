@@ -17,6 +17,8 @@ type ColorProps = {
   RESULT_BOX_COLOR: string;
   CONGRATS_COLOR: string;
   FAILED_COLOR: string;
+  PROGESS_CIRCLE_COLOR: string;
+  PROGRESS_CIRCLE_SHADOW_COLOR: string;
 };
 
 type SizeProps = {

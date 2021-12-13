@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useEffect, useState } from 'react';
-import { Text } from 'react-native';
 import { ThemeContext } from 'styled-components/native';
 
 import { Baseboard } from '~/components/Baseboard';
+import { CircleProgress } from '~/components/CircleProgress';
 import { NewText } from '~/components/Text';
 
 import * as S from './styles';
@@ -62,13 +62,33 @@ export function Result() {
 
           <S.ContainerQuantity>
             <S.Icons iconType="feather" name="check" correct />
-            <Text>{quantityQuestion} Corretas</Text>
+            <NewText fontColor={Colors.INPUT_TEXT_COLOR} fontSize={16}>
+              {quantityQuestion} Corretas
+            </NewText>
 
             <S.Icons iconType="evilIcons" name="close" />
-            <Text>{10 - quantityQuestion} Incorretas</Text>
+            <NewText fontColor={Colors.INPUT_TEXT_COLOR} fontSize={16}>
+              {10 - quantityQuestion} Incorretas
+            </NewText>
           </S.ContainerQuantity>
         </S.ContainerResultQuantity>
+
+        <S.ContainerGraph>
+          <CircleProgress difficulty="Fácil" percent={quantityQuestion * 10} />
+
+          <CircleProgress
+            difficulty="Médio"
+            percent={quantityQuestion * 10}
+            midCircle
+          />
+
+          <CircleProgress
+            difficulty="Difícil"
+            percent={quantityQuestion * 10}
+          />
+        </S.ContainerGraph>
       </S.ContainerResult>
+
       <S.ContainerBase>
         <Baseboard />
       </S.ContainerBase>

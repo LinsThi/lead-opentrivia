@@ -16,6 +16,8 @@ export default {
     RESULT_BOX_COLOR: '#8967C7',
     CONGRATS_COLOR: '#3CB371',
     FAILED_COLOR: '#F24F00',
+    PROGESS_CIRCLE_COLOR: '#472f75',
+    PROGRESS_CIRCLE_SHADOW_COLOR: '#D7D8D7',
   },
 
   Sizes: {
