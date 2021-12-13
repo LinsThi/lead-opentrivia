@@ -31,6 +31,18 @@ const reducer: Reducer<UserState> = (
         avatar: '',
         isLogged: false,
       };
+    case UserType.USER_UPDATE_AVATAR:
+      return {
+        ...state,
+        avatar: payload.avatar,
+      };
+    case UserType.USER_UPDATE:
+      return {
+        ...state,
+        username: payload.username,
+        password: payload.password,
+        avatar: payload.avatar,
+      };
     default:
       return state;
   }
