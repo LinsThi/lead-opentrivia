@@ -43,6 +43,12 @@ export const ContainerResultQuantity = styled.View`
   background: ${({ theme }) => theme.Colors.BACKGROUND};
 `;
 
+export const ContainerGraph = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const ContainerQuantity = styled.View`
   flex-direction: row;
   align-items: center;

@@ -12,7 +12,7 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 5px;
+  padding: 0px 15px;
 `;
 
 export const ButtonIcon = styled.TouchableOpacity``;
