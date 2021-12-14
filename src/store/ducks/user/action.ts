@@ -5,6 +5,7 @@ import type {
   LogoutActionProps,
   UpdateAvatarActionProps,
   UpdateUserActionProps,
+  UserProps,
 } from './types';
 import { UserType } from './types';
 
@@ -20,8 +21,5 @@ export const updateAvatarAction = (avatar: string): UpdateAvatarActionProps =>
   action(UserType.USER_UPDATE_AVATAR, { avatar });
 
 export const updateUserAction = (
-  username: string,
-  password: string,
-  avatar: string,
-): UpdateUserActionProps =>
-  action(UserType.USER_UPDATE, { username, password, avatar });
+  currentUser: UserProps,
+): UpdateUserActionProps => action(UserType.USER_UPDATE, { currentUser });

@@ -8,25 +8,30 @@ import { ThemeContext } from 'styled-components/native';
 import { Button } from '~/components/Button';
 import Input from '~/components/InputLogin';
 import { ModalProduct } from '~/components/Modal';
+import Select from '~/components/Select';
 
 import type { AplicationState } from '~/@types/Entity/AplicationState';
+import type { GenderProps } from '~/@types/Entity/Gender';
 import { HOME_SCREEN } from '~/constants/routes';
 import { updateUserAction } from '~/store/ducks/user/action';
+import type { UserProps } from '~/store/ducks/user/types';
 
 import * as S from './styles';
 
 export function Profile() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { avatar, username } = useSelector(
-    (state: AplicationState) => state.user,
-  );
+  const { currentUser } = useSelector((state: AplicationState) => state.user);
   const { Colors } = useContext(ThemeContext);
 
   const [image, setImage] = useState('');
   const [usernameClient, setUsernameClient] = useState('');
-  const [password, setPassword] = useState('');
+  const [genderClient, setGenderClient] = useState({} as GenderProps);
+  const [emailClient, setEmailClient] = useState('');
+  const [dateBirthDay, setDateBirthDay] = useState('');
+  const [passwordClient, setPasswordClient] = useState('');
   const [newPassword, setNewPassword] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -37,8 +42,23 @@ export function Profile() {
       iconLeftName: 'arrowleft',
     });
 
-    setUsernameClient(username);
-  }, [navigation, username]);
+    if (currentUser) {
+      setImage(currentUser.avatar);
+      setUsernameClient(currentUser.username);
+      setGenderClient(currentUser.gender);
+      setEmailClient(currentUser.email);
+      setDateBirthDay(currentUser.dateBirth);
+      setPasswordClient(currentUser.password);
+    }
+  }, [
+    navigation,
+    currentUser,
+    currentUser.username,
+    currentUser.gender,
+    currentUser.email,
+    currentUser.dateBirth,
+    currentUser.password,
+  ]);
 
   useEffect(() => {
     (async () => {
@@ -55,15 +75,32 @@ export function Profile() {
   }, []);
 
   useEffect(() => {
-    if (avatar) {
-      setImage(avatar);
+    if (currentUser.avatar) {
+      setImage(currentUser.avatar);
     }
-  }, [avatar]);
+  }, [currentUser.avatar]);
 
   const handleUpdateUser = useCallback(() => {
-    dispatch(updateUserAction(usernameClient, password, image));
+    const userUpdate: UserProps = {
+      avatar: image,
+      username: usernameClient,
+      gender: genderClient,
+      dateBirth: dateBirthDay,
+      email: emailClient,
+      password: passwordClient,
+    };
+    dispatch(updateUserAction(userUpdate));
     navigation.navigate(HOME_SCREEN);
-  }, [dispatch, usernameClient, password, image, navigation]);
+  }, [
+    dispatch,
+    usernameClient,
+    passwordClient,
+    image,
+    navigation,
+    genderClient,
+    dateBirthDay,
+    emailClient,
+  ]);
 
   const showModal = useCallback(() => {
     setVisible(true);
@@ -98,11 +135,35 @@ export function Profile() {
         />
 
         <Input
+          placeholder="E-mail"
+          placeholderTextColor={Colors.PLACEHOLDER_COLOR}
+          iconType="materialCommunityIcons"
+          iconLeft="email"
+          value={emailClient}
+          onChangeText={setEmailClient}
+        />
+
+        <Input
+          placeholder="Data de nascimento"
+          placeholderTextColor={Colors.PLACEHOLDER_COLOR}
+          iconType="font"
+          iconLeft="birthday-cake"
+          value={dateBirthDay}
+          onChangeText={setDateBirthDay}
+        />
+
+        <Select
+          title="Selecione o gênero"
+          selectedValue={genderClient}
+          onValueChange={genderSelected => setGenderClient(genderSelected)}
+        />
+
+        <Input
           placeholder="Senha"
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="lock"
-          value={password}
-          onChangeText={setPassword}
+          value={passwordClient}
+          onChangeText={setPasswordClient}
           secureTextEntry={!showPassword}
           iconAction={() => setShowPassword(!showPassword)}
           iconRight={showPassword ? 'eye-off' : 'eye'}

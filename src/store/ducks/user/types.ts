@@ -1,5 +1,7 @@
 import type { Action } from 'redux';
 
+import type { GenderProps } from '~/@types/Entity/Gender';
+
 export enum UserType {
   USER_LOGIN = '@user/USER_LOGIN',
   USER_LOGOUT = '@user/USER_LOGOUT',
@@ -7,10 +9,17 @@ export enum UserType {
   USER_UPDATE = '@user/USER_UPDATE',
 }
 
-export interface UserState {
+export interface UserProps {
   username: string;
   password: string;
   avatar: string;
+  email: string;
+  dateBirth: string;
+  gender: GenderProps;
+}
+
+export interface UserState {
+  currentUser: UserProps;
   isLogged: boolean;
 }
 
@@ -35,9 +44,5 @@ export interface UpdateAvatarActionProps extends Action {
 
 export interface UpdateUserActionProps extends Action {
   type: UserType.USER_UPDATE;
-  payload: {
-    username: string;
-    password: string;
-    avatar: string;
-  };
+  payload: { currentUser: UserProps };
 }

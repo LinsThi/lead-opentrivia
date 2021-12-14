@@ -4,9 +4,17 @@ import type { UserState } from './types';
 import { UserType } from './types';
 
 const INITIAL_STATE: UserState = {
-  username: '',
-  password: '',
-  avatar: '',
+  currentUser: {
+    username: '',
+    password: '',
+    avatar: '',
+    email: '',
+    dateBirth: '',
+    gender: {
+      id: 0,
+      label: '',
+    },
+  },
   isLogged: false,
 };
 
@@ -18,30 +26,25 @@ const reducer: Reducer<UserState> = (
     case UserType.USER_LOGIN:
       return {
         ...state,
-        username: payload.username,
-        password: payload.password,
-        avatar: '',
+        currentUser: {
+          username: payload.username,
+          password: payload.password,
+        },
         isLogged: true,
       };
     case UserType.USER_LOGOUT:
-      return {
-        ...state,
-        username: '',
-        password: '',
-        avatar: '',
-        isLogged: false,
-      };
+      return INITIAL_STATE;
     case UserType.USER_UPDATE_AVATAR:
       return {
         ...state,
-        avatar: payload.avatar,
+        currentUser: {
+          avatar: payload.avatar,
+        },
       };
     case UserType.USER_UPDATE:
       return {
         ...state,
-        username: payload.username,
-        password: payload.password,
-        avatar: payload.avatar,
+        currentUser: payload.currentUser,
       };
     default:
       return state;
