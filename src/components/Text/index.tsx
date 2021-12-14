@@ -1,5 +1,8 @@
 import React from 'react';
 import type { TextProps } from 'react-native';
+import { useSelector } from 'react-redux';
+
+import type { AplicationState } from '~/@types/Entity/AplicationState';
 
 import * as S from './styles';
 
@@ -14,8 +17,10 @@ export function NewText({
   children,
   ...rest
 }: NewTextProps & TextProps) {
+  const { delta } = useSelector((state: AplicationState) => state.font);
+
   return (
-    <S.Text {...rest} fontSize={fontSize} fontColor={fontColor}>
+    <S.Text {...rest} fontSize={fontSize + delta} fontColor={fontColor}>
       {children}
     </S.Text>
   );

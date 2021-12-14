@@ -9,6 +9,7 @@ interface IconInputProps {
 
 interface TextInputProps {
   iconRight?: string;
+  fontSize: number;
 }
 
 export const InputWrapper = styled.View`

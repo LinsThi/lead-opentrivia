@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import type { TextInputProps } from 'react-native';
+import { useSelector } from 'react-redux';
+import { ThemeContext } from 'styled-components/native';
+
+import type { AplicationState } from '~/@types/Entity/AplicationState';
 
 import * as S from './styles';
 
@@ -17,13 +21,21 @@ const Input: React.FC<TextInputProps & InputProps> = ({
   iconAction,
   ...rest
 }: InputProps) => {
+  const { Sizes } = useContext(ThemeContext);
+  const { delta } = useSelector((state: AplicationState) => state.font);
+  const fontSizeInput = Sizes.FONTSIZE_INPUT;
+
   return (
     <S.InputWrapper>
       <S.ContainerInputIcon>
         {iconLeft && <S.IconInput iconType={iconType} name={iconLeft} />}
         <S.Container>
           <S.ContainerInput>
-            <S.InputLogin {...rest} iconRight={iconRight} />
+            <S.InputLogin
+              {...rest}
+              iconRight={iconRight}
+              fontSize={fontSizeInput + delta}
+            />
             {iconRight && (
               <S.Button onPress={() => iconAction && iconAction()}>
                 <S.IconInput name={iconRight} />

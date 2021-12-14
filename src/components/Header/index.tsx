@@ -1,6 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import {
+  decrementFontSize,
+  incrementFontSize,
+  recoveryFontSize,
+} from '~/store/ducks/font/action';
 import { toogleThemeAction } from '~/store/ducks/themes/action';
 
 import { NewText } from '../Text';
@@ -30,15 +35,15 @@ export function Header({
         </S.ButtonTheme>
 
         <S.ContainerFont>
-          <S.ButtonTheme onPress={() => console.log('Diminui')}>
+          <S.ButtonTheme onPress={() => dispatch(decrementFontSize())}>
             <S.DecreaseIncreaseFont>A-</S.DecreaseIncreaseFont>
           </S.ButtonTheme>
 
-          <S.ButtonTheme onPress={() => console.log('Normal')}>
+          <S.ButtonTheme onPress={() => dispatch(recoveryFontSize())}>
             <S.RestoreFont>A</S.RestoreFont>
           </S.ButtonTheme>
 
-          <S.ButtonTheme onPress={() => console.log('Aumenta')}>
+          <S.ButtonTheme onPress={() => dispatch(incrementFontSize())}>
             <S.DecreaseIncreaseFont>A+</S.DecreaseIncreaseFont>
           </S.ButtonTheme>
         </S.ContainerFont>

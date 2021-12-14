@@ -21,6 +21,7 @@ export default {
   },
 
   Sizes: {
+    FONTSIZE_INPUT: 18,
     FONTSIZE_BUTTON: 20,
     FONTSIZE_TEXT: 22,
     ICON_SIZE: 25,
