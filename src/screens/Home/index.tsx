@@ -12,7 +12,7 @@ import { listQuestions } from './mock';
 import * as S from './styles';
 
 export function Home() {
-  const { username } = useSelector((state: AplicationState) => state.user);
+  const { currentUser } = useSelector((state: AplicationState) => state.user);
 
   const navigation = useNavigation();
   const [numbColumns, setNumbColumns] = useState(2);
@@ -20,9 +20,9 @@ export function Home() {
 
   useEffect(() => {
     navigation.setOptions({
-      title: `Bem-vindo(a) ${username}`,
+      title: `Bem-vindo(a) ${currentUser.username}`,
     });
-  }, [navigation, username]);
+  }, [navigation, currentUser.username]);
 
   const handleSelectCategory = useCallback((category: string) => {
     setCategorySelected(category);

@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
@@ -6,14 +5,11 @@ import { ThemeContext } from 'styled-components/native';
 import { Button } from '~/components/Button';
 import Input from '~/components/InputLogin';
 
-import { HOME_SCREEN } from '~/constants/routes';
-import { toogleThemeAction } from '~/store/ducks/themes/action';
 import { loginAction } from '~/store/ducks/user/action';
 
 import * as S from './styles';
 
 export function Login() {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const { Colors } = useContext(ThemeContext);

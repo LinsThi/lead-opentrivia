@@ -6,42 +6,37 @@ interface IconProps {
   name: string;
 }
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   background: ${({ theme }) => theme.Colors.BACKGROUND};
+  padding: 0px 5px;
 `;
 
 export const ContainerInputImage = styled.View`
-  flex: 0.3;
-  width: 100%;
-  justify-content: center;
   align-items: center;
-  flex-direction: row;
+  margin-top: 30px;
 `;
 
 export const ContainerIcon = styled.View`
   position: absolute;
-  padding-left: 130px;
-  padding-top: 100px;
+  padding-left: 100px;
+  padding-top: 90px;
 `;
 
 export const ContainerInputs = styled.View`
-  flex: 0.5;
-  justify-content: center;
   align-items: center;
+  margin-top: 30px;
 `;
 
 export const ContainerButtons = styled.View`
-  flex: 0.2;
-  justify-content: center;
   align-items: center;
+  padding-left: 25%;
+  margin-top: 30px;
 `;
 
 export const ImageUser = styled.Image`
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 100px;
 `;
 
