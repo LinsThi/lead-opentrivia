@@ -13,11 +13,13 @@ import {
   HOME_SCREEN,
   LOGIN_SCREEN,
   PROFILE_SCREEN,
+  QUESTION_SCREEN,
   RESULT_SCREEN,
 } from '~/constants/routes';
 import { Home } from '~/screens/Home';
 import { Login } from '~/screens/Login';
 import { Profile } from '~/screens/Profile';
+import { Question } from '~/screens/Question';
 import { Result } from '~/screens/Result';
 
 import { createTheme } from './utils';
@@ -53,6 +55,14 @@ export function RootStack() {
                   component={Profile}
                   options={{
                     header: props => <Header {...props} enableNavigation />,
+                  }}
+                />
+
+                <Stack.Screen
+                  name={QUESTION_SCREEN}
+                  component={Question}
+                  options={{
+                    header: props => <Header {...props} />,
                   }}
                 />
 

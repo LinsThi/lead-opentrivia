@@ -8,6 +8,7 @@ type ColorProps = {
   INPUT_TEXT_COLOR: string;
   PLACEHOLDER_COLOR: string;
   BUTTON_COLOR: string;
+  BUTTON_DISABLE_COLOR: string;
   BORDER_BUTTON_COLOR: string;
   FONT_COLOR: string;
   FONT_RESULT_COLOR: string;
@@ -19,6 +20,9 @@ type ColorProps = {
   FAILED_COLOR: string;
   PROGESS_CIRCLE_COLOR: string;
   PROGRESS_CIRCLE_SHADOW_COLOR: string;
+  QUESTION_COLOR: string;
+  OPTION_SELECTED_COLOR: string;
+  OPTION_NOT_SELECTED_COLOR: string;
 };
 
 type SizeProps = {

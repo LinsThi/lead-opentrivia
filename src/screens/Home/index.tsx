@@ -6,6 +6,7 @@ import { Baseboard } from '~/components/Baseboard';
 import { NewText } from '~/components/Text';
 
 import type { AplicationState } from '~/@types/Entity/AplicationState';
+import { QUESTION_SCREEN } from '~/constants/routes';
 
 import { listQuestions } from './mock';
 
@@ -24,9 +25,13 @@ export function Home() {
     });
   }, [navigation, currentUser.username]);
 
-  const handleSelectCategory = useCallback((category: string) => {
-    setCategorySelected(category);
-  }, []);
+  const handleSelectCategory = useCallback(
+    (category: string) => {
+      setCategorySelected(category);
+      navigation.navigate(QUESTION_SCREEN);
+    },
+    [navigation],
+  );
 
   function renderCategory({ item }: any) {
     return (
