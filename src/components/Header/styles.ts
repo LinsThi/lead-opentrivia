@@ -20,6 +20,7 @@ export const Container = styled.View`
 export const ContainerButtons = styled.View<ContainerProps>`
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding: 5px 10px;
 `;
 

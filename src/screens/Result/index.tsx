@@ -56,7 +56,7 @@ export function Result() {
             {textCongrats}
           </NewText>
 
-          <NewText fontSize={20} fontColor={Colors.FONT_RESULT_COLOR}>
+          <NewText fontSize={18} fontColor={Colors.FONT_RESULT_COLOR}>
             Você conseguiu fazer uma pontuação total de
           </NewText>
 
