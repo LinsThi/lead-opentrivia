@@ -1,3 +1,4 @@
+import { useFormik } from 'formik';
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
@@ -7,20 +8,35 @@ import Input from '~/components/InputLogin';
 
 import { loginAction } from '~/store/ducks/user/action';
 
+import { validationSchema } from './validations/validation';
+
 import * as S from './styles';
+
+interface DataProps {
+  username: string;
+  password: string;
+}
 
 export function Login() {
   const dispatch = useDispatch();
 
   const { Colors } = useContext(ThemeContext);
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleNavigationHome() {
-    dispatch(loginAction(username, password));
+  function handleLogin(data: DataProps) {
+    dispatch(loginAction(data.username, data.password));
   }
+
+  const { handleSubmit, dirty, handleChange, values, errors } = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: handleLogin,
+    validateOnChange: false,
+  });
 
   return (
     <S.Container>
@@ -34,19 +50,21 @@ export function Login() {
 
       <S.ContainerInput>
         <Input
-          placeholder="Username"
+          placeholder="Usuário"
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="person"
           iconType="ionicons"
-          value={username}
-          onChangeText={setUsername}
+          value={values.username}
+          error={errors.username}
+          onChangeText={handleChange('username')}
         />
         <Input
-          placeholder="Password"
+          placeholder="Senha"
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="lock"
-          value={password}
-          onChangeText={setPassword}
+          value={values.password}
+          error={errors.password}
+          onChangeText={handleChange('password')}
           secureTextEntry={!showPassword}
           iconAction={() => setShowPassword(!showPassword)}
           iconRight={showPassword ? 'eye-off' : 'eye'}
@@ -56,7 +74,8 @@ export function Login() {
       <S.ContainerButton>
         <Button
           title="Entrar"
-          onPress={() => handleNavigationHome()}
+          disabled={!dirty}
+          onPress={() => handleSubmit()}
           color={Colors.BUTTON_COLOR}
         />
       </S.ContainerButton>

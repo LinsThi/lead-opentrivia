@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import Icon from '../Icon';
+import { NewText } from '../Text';
 
 interface IconInputProps {
   name: string;
@@ -14,6 +15,7 @@ interface TextInputProps {
 
 export const InputWrapper = styled.View`
   margin-bottom: 10px;
+  max-width: 300px;
 `;
 
 export const ContainerInputIcon = styled.View`
@@ -51,6 +53,11 @@ export const InputLogin = styled.TextInput<TextInputProps>`
   padding-right: 10px;
   height: 53px;
   color: ${({ theme }) => theme.Colors.INPUT_TEXT_COLOR};
+`;
+
+export const ErrorMessage = styled(NewText)`
+  color: ${({ theme }) => theme.Colors.ERROR_COLOR};
+  margin-top: 10px;
 `;
 
 export const Button = styled.TouchableOpacity``;

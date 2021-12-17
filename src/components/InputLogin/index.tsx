@@ -11,6 +11,7 @@ interface InputProps {
   iconRight?: string;
   iconLeft?: string;
   iconType?: string;
+  error?: any;
   iconAction?: () => void;
 }
 
@@ -18,6 +19,7 @@ const Input: React.FC<TextInputProps & InputProps> = ({
   iconRight,
   iconLeft,
   iconType,
+  error,
   iconAction,
   ...rest
 }: InputProps) => {
@@ -44,6 +46,7 @@ const Input: React.FC<TextInputProps & InputProps> = ({
           </S.ContainerInput>
         </S.Container>
       </S.ContainerInputIcon>
+      {error && <S.ErrorMessage fontSize={14}>{error}</S.ErrorMessage>}
     </S.InputWrapper>
   );
 };

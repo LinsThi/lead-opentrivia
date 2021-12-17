@@ -2,11 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {
-  LOGIN_SCREEN,
-  PROFILE_SCREEN,
-  RESULT_SCREEN,
-} from '~/constants/routes';
+import { PROFILE_SCREEN, RESULT_SCREEN } from '~/constants/routes';
 import { logoutAction } from '~/store/ducks/user/action';
 
 import * as S from './styles';

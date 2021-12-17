@@ -31,7 +31,7 @@ export const ContainerInputs = styled.View`
 export const ContainerButtons = styled.View`
   align-items: center;
   padding-left: 25%;
-  margin-top: 30px;
+  margin: 20px 0px;
 `;
 
 export const ImageUser = styled.Image`
