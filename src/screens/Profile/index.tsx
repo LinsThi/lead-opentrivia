@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import * as ImagePicker from 'expo-image-picker';
+import { useFormik } from 'formik';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +17,18 @@ import { HOME_SCREEN } from '~/constants/routes';
 import { updateUserAction } from '~/store/ducks/user/action';
 import type { UserProps } from '~/store/ducks/user/types';
 
+import { validationSchema } from './validations/validation';
+
 import * as S from './styles';
+
+interface DataProps {
+  usernameClient: string;
+  emailClient: string;
+  birthdayClient: string;
+  genderClient: GenderProps;
+  passwordClient: string;
+  newPasswordClient: string;
+}
 
 export function Profile() {
   const navigation = useNavigation();
@@ -25,12 +37,6 @@ export function Profile() {
   const { Colors } = useContext(ThemeContext);
 
   const [image, setImage] = useState('');
-  const [usernameClient, setUsernameClient] = useState('');
-  const [genderClient, setGenderClient] = useState({} as GenderProps);
-  const [emailClient, setEmailClient] = useState('');
-  const [dateBirthDay, setDateBirthDay] = useState('');
-  const [passwordClient, setPasswordClient] = useState('');
-  const [newPassword, setNewPassword] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -41,24 +47,7 @@ export function Profile() {
       iconLeftType: 'antDesign',
       iconLeftName: 'arrowleft',
     });
-
-    if (currentUser) {
-      setImage(currentUser.avatar);
-      setUsernameClient(currentUser.username);
-      setGenderClient(currentUser.gender);
-      setEmailClient(currentUser.email);
-      setDateBirthDay(currentUser.dateBirth);
-      setPasswordClient(currentUser.password);
-    }
-  }, [
-    navigation,
-    currentUser,
-    currentUser.username,
-    currentUser.gender,
-    currentUser.email,
-    currentUser.dateBirth,
-    currentUser.password,
-  ]);
+  }, [navigation]);
 
   useEffect(() => {
     (async () => {
@@ -80,31 +69,40 @@ export function Profile() {
     }
   }, [currentUser.avatar]);
 
-  const handleUpdateUser = useCallback(() => {
-    const userUpdate: UserProps = {
-      avatar: image,
-      username: usernameClient,
-      gender: genderClient,
-      dateBirth: dateBirthDay,
-      email: emailClient,
-      password: passwordClient,
-    };
-    dispatch(updateUserAction(userUpdate));
-    navigation.navigate(HOME_SCREEN);
-  }, [
-    dispatch,
-    usernameClient,
-    passwordClient,
-    image,
-    navigation,
-    genderClient,
-    dateBirthDay,
-    emailClient,
-  ]);
+  const handleUpdateUser = useCallback(
+    (data: DataProps) => {
+      const userUpdate: UserProps = {
+        avatar: image,
+        username: data.usernameClient,
+        gender: data.genderClient,
+        dateBirth: data.birthdayClient,
+        email: data.emailClient,
+        password: data.newPasswordClient,
+      };
+      dispatch(updateUserAction(userUpdate));
+      navigation.navigate(HOME_SCREEN);
+    },
+    [dispatch, image, navigation],
+  );
 
   const showModal = useCallback(() => {
     setVisible(true);
   }, []);
+
+  const { handleSubmit, dirty, handleChange, values, errors, setFieldValue } =
+    useFormik({
+      initialValues: {
+        usernameClient: currentUser.username,
+        emailClient: currentUser.email,
+        birthdayClient: currentUser.dateBirth,
+        genderClient: currentUser.gender,
+        passwordClient: currentUser.password,
+        newPasswordClient: '',
+      },
+      validationSchema,
+      onSubmit: handleUpdateUser,
+      validateOnChange: false,
+    });
 
   return (
     <S.Container>
@@ -130,8 +128,9 @@ export function Profile() {
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="person"
           iconType="ionicons"
-          value={usernameClient}
-          onChangeText={setUsernameClient}
+          value={values.usernameClient}
+          error={errors.usernameClient}
+          onChangeText={handleChange('usernameClient')}
         />
 
         <Input
@@ -139,8 +138,9 @@ export function Profile() {
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconType="materialCommunityIcons"
           iconLeft="email"
-          value={emailClient}
-          onChangeText={setEmailClient}
+          value={values.emailClient}
+          error={errors.emailClient}
+          onChangeText={handleChange('emailClient')}
         />
 
         <Input
@@ -148,22 +148,26 @@ export function Profile() {
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconType="font"
           iconLeft="birthday-cake"
-          value={dateBirthDay}
-          onChangeText={setDateBirthDay}
+          value={values.birthdayClient}
+          error={errors.birthdayClient}
+          onChangeText={handleChange('birthdayClient')}
         />
 
         <Select
           title="Selecione o gênero"
-          selectedValue={genderClient}
-          onValueChange={genderSelected => setGenderClient(genderSelected)}
+          selectedValue={values.genderClient}
+          onValueChange={genderSelected =>
+            setFieldValue('genderClient', genderSelected)
+          }
         />
 
         <Input
           placeholder="Senha"
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="lock"
-          value={passwordClient}
-          onChangeText={setPasswordClient}
+          value={values.passwordClient}
+          error={errors.passwordClient}
+          onChangeText={handleChange('passwordClient')}
           secureTextEntry={!showPassword}
           iconAction={() => setShowPassword(!showPassword)}
           iconRight={showPassword ? 'eye-off' : 'eye'}
@@ -173,18 +177,20 @@ export function Profile() {
           placeholder="Nova senha"
           placeholderTextColor={Colors.PLACEHOLDER_COLOR}
           iconLeft="lock"
-          value={newPassword}
-          onChangeText={setNewPassword}
+          value={values.newPasswordClient}
+          error={errors.newPasswordClient}
+          onChangeText={handleChange('newPasswordClient')}
           secureTextEntry={!showNewPassword}
           iconAction={() => setShowNewPassword(!showNewPassword)}
-          iconRight={showPassword ? 'eye-off' : 'eye'}
+          iconRight={showNewPassword ? 'eye-off' : 'eye'}
         />
       </S.ContainerInputs>
 
       <S.ContainerButtons>
         <Button
           title="Atualizar"
-          onPress={() => handleUpdateUser()}
+          onPress={() => handleSubmit()}
+          disabled={!dirty}
           color={Colors.BUTTON_COLOR}
         />
       </S.ContainerButtons>

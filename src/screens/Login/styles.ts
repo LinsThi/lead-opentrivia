@@ -2,23 +2,28 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.Colors.BACKGROUND};
 `;
 
 export const ContainerImage = styled.View`
   flex: 0.4;
+  justify-content: flex-end;
 `;
 
 export const ContainerInput = styled.View`
-  flex: 0.2;
+  flex: 0.3;
+  width: 88%;
+  justify-content: center;
   align-items: center;
+  margin-top: 50px;
 `;
 
 export const ContainerButton = styled.View`
   flex: 0.2;
-  margin-top: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 export const ImageLogo = styled.Image`

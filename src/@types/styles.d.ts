@@ -6,11 +6,13 @@ type ColorProps = {
   BLUE: string;
   BACKGROUND: string;
   INPUT_TEXT_COLOR: string;
+  ERROR_COLOR: string;
   PLACEHOLDER_COLOR: string;
   BUTTON_COLOR: string;
   BUTTON_DISABLE_COLOR: string;
   BORDER_BUTTON_COLOR: string;
   FONT_COLOR: string;
+  FONT_DISABLE_COLOR: string;
   FONT_RESULT_COLOR: string;
   ICON_COLOR: string;
   ICON_COLOR_INPUT: string;

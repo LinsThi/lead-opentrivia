@@ -31,8 +31,6 @@ export const FlatCategoryList = styled.FlatList`
   margin-top: 10px;
 `;
 
-export const ListCategory = styled.FlatList`
-  width: 100%;
-`;
+export const ListCategory = styled.FlatList``;
 
 export const ButtonCategory = styled.TouchableOpacity``;
