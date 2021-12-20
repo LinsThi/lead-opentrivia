@@ -6,6 +6,7 @@ import { ThemeContext } from 'styled-components/native';
 import { Button } from '~/components/Button';
 import Input from '~/components/InputLogin';
 
+import { getCategoryThemesAction } from '~/store/ducks/category/action';
 import { loginAction } from '~/store/ducks/user/action';
 
 import { validationSchema } from './validations/validation';
@@ -25,6 +26,7 @@ export function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   function handleLogin(data: DataProps) {
+    dispatch(getCategoryThemesAction());
     dispatch(loginAction(data.username, data.password));
   }
 

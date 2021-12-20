@@ -8,22 +8,31 @@ import { NewText } from '~/components/Text';
 import type { AplicationState } from '~/@types/Entity/AplicationState';
 import { QUESTION_SCREEN } from '~/constants/routes';
 
-import { listQuestions } from './mock';
+import type { CategoryListThemesProps } from './utils';
+import { organizeList } from './utils';
 
 import * as S from './styles';
 
 export function Home() {
   const { currentUser } = useSelector((state: AplicationState) => state.user);
+  const { categoryListThemes } = useSelector(
+    (state: AplicationState) => state.category,
+  );
 
   const navigation = useNavigation();
   const [numbColumns, setNumbColumns] = useState(2);
   const [categorySelected, setCategorySelected] = useState('');
+  const [listData, setListData] = useState<CategoryListThemesProps[] | []>([]);
 
   useEffect(() => {
     navigation.setOptions({
       title: `Bem-vindo(a) ${currentUser.username}`,
     });
   }, [navigation, currentUser.username]);
+
+  useEffect(() => {
+    setListData(organizeList(categoryListThemes));
+  }, [categoryListThemes]);
 
   const handleSelectCategory = useCallback(
     (category: string) => {
@@ -46,8 +55,8 @@ export function Home() {
   return (
     <S.Container>
       <S.FlatCategoryList
-        data={listQuestions}
-        extraData={listQuestions}
+        data={listData}
+        extraData={listData}
         keyExtractor={(_, index) => String(index)}
         renderItem={renderCategory}
         numColumns={numbColumns}
