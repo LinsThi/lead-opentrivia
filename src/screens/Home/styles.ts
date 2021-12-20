@@ -9,7 +9,7 @@ export const ContainerList = styled.View``;
 
 export const ContainerCategory = styled.View`
   width: 150px;
-  height: 70px;
+  height: 100px;
   justify-content: center;
   align-items: center;
 
@@ -29,6 +29,7 @@ export const ContainerBase = styled.View`
 export const FlatCategoryList = styled.FlatList`
   width: 100%;
   margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
 export const ListCategory = styled.FlatList``;
