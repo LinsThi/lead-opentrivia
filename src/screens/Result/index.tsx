@@ -35,7 +35,7 @@ export function Result() {
     <S.Container>
       <S.ContainerResult style={S.styles.shadow}>
         <S.TextScreen>Quiz resultado</S.TextScreen>
-        <S.ContainerResultInfo>
+        <S.ContainerImage>
           <S.Image
             source={{
               uri:
@@ -44,7 +44,7 @@ export function Result() {
                   : 'https://images.emojiterra.com/google/android-nougat/512px/1f3c5.png',
             }}
           />
-        </S.ContainerResultInfo>
+        </S.ContainerImage>
 
         <S.ContainerResultQuantity>
           <NewText
@@ -56,8 +56,8 @@ export function Result() {
             {textCongrats}
           </NewText>
 
-          <NewText fontSize={18} fontColor={Colors.FONT_RESULT_COLOR}>
-            Você conseguiu fazer uma pontuação total de
+          <NewText fontSize={20} fontColor={Colors.FONT_RESULT_COLOR}>
+            Sua pontuação foi:
           </NewText>
 
           <S.ContainerQuantity>

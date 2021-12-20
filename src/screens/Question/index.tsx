@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components/native';
 
@@ -10,6 +11,7 @@ import * as S from './styles';
 
 export function Question() {
   const { Colors } = useContext(ThemeContext);
+  const navigation = useNavigation();
   const [numberQuestion, setNumberQuestion] = useState(0);
   const [questionCurrent, setQuestionCurrent] = useState(
     Questions[numberQuestion],
@@ -34,7 +36,10 @@ export function Question() {
 
   useEffect(() => {
     setQuestionCurrent(Questions[numberQuestion]);
-  }, [numberQuestion]);
+    navigation.setOptions({
+      title: `Questão ${numberQuestion + 1}`,
+    });
+  }, [numberQuestion, navigation]);
 
   return (
     <S.Container>
@@ -77,12 +82,8 @@ export function Question() {
       <S.ContainerButtons>
         <S.ButtonNavigation
           onPress={() => handlePreviousQuestion()}
-          buttonBG={
-            numberQuestion === 0
-              ? Colors.BUTTON_DISABLE_COLOR
-              : Colors.FAILED_COLOR
-          }
           disabled={numberQuestion === 0}
+          isDisabled={numberQuestion === 0}
         >
           <NewText>Anterior</NewText>
         </S.ButtonNavigation>
@@ -91,7 +92,6 @@ export function Question() {
           onPress={() =>
             numberQuestion === 2 ? handleSendQuizz() : handleNextQuestion()
           }
-          buttonBG={Colors.CONGRATS_COLOR}
         >
           <NewText>{numberQuestion === 2 ? 'Finalizar' : 'Proxima'}</NewText>
         </S.ButtonNavigation>

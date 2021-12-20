@@ -18,40 +18,38 @@ export const Container = styled.View`
 
 export const ContainerResult = styled.View`
   flex: 1;
-  width: 85%;
   align-items: center;
 
   border-radius: 10px;
-  margin: 30px 0px;
+  margin: 30px 10px;
 
   background: ${({ theme }) => theme.Colors.RESULT_BOX_COLOR};
 `;
 
-export const ContainerResultInfo = styled.View`
-  width: 70%;
+export const ContainerImage = styled.View`
   align-items: center;
-
-  border-radius: 10px;
-  margin: 30px 0px;
+  padding: 30px 0px;
 `;
 
 export const ContainerResultQuantity = styled.View`
-  width: 70%;
+  width: 260px;
+  margin: 0px 20px;
   align-items: center;
-
   border-radius: 15px;
   background: ${({ theme }) => theme.Colors.BACKGROUND};
+`;
+
+export const ContainerQuantity = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const ContainerGraph = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
-`;
 
-export const ContainerQuantity = styled.View`
-  flex-direction: row;
-  align-items: center;
+  padding: 0px 20px;
 `;
 
 export const ContainerBase = styled.View`
