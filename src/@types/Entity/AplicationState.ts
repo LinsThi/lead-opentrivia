@@ -1,5 +1,6 @@
 import type { CategoryThemesState } from '~/store/ducks/category/types';
 import type { FontState } from '~/store/ducks/font/types';
+import type { QuestionQuizState } from '~/store/ducks/questions/types';
 import type { ThemeState } from '~/store/ducks/themes/types';
 import type { UserState } from '~/store/ducks/user/types';
 
@@ -8,4 +9,5 @@ export interface AplicationState {
   user: UserState;
   font: FontState;
   category: CategoryThemesState;
+  question: QuestionQuizState;
 }

@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Baseboard } from '~/components/Baseboard';
 import { NewText } from '~/components/Text';
 
 import type { AplicationState } from '~/@types/Entity/AplicationState';
 import { QUESTION_SCREEN } from '~/constants/routes';
+import { getQuestionQuizAction } from '~/store/ducks/questions/action';
 
 import type { CategoryListThemesProps } from './utils';
 import { organizeList } from './utils';
@@ -19,9 +20,11 @@ export function Home() {
     (state: AplicationState) => state.category,
   );
 
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const [numbColumns, setNumbColumns] = useState(2);
-  const [categorySelected, setCategorySelected] = useState('');
+  const [categorySelected, setCategorySelected] = useState(0);
   const [listData, setListData] = useState<CategoryListThemesProps[] | []>([]);
 
   useEffect(() => {
@@ -35,16 +38,17 @@ export function Home() {
   }, [categoryListThemes]);
 
   const handleSelectCategory = useCallback(
-    (category: string) => {
-      setCategorySelected(category);
-      navigation.navigate(QUESTION_SCREEN);
+    (idCategory: number) => {
+      setCategorySelected(idCategory);
+      dispatch(getQuestionQuizAction(categorySelected, 'easy'));
+      // navigation.navigate(QUESTION_SCREEN);
     },
-    [navigation],
+    [categorySelected, dispatch, navigation],
   );
 
   function renderCategory({ item }: any) {
     return (
-      <S.ButtonCategory onPress={() => handleSelectCategory(item.name)}>
+      <S.ButtonCategory onPress={() => handleSelectCategory(item.id)}>
         <S.ContainerCategory>
           <NewText>{item.name}</NewText>
         </S.ContainerCategory>
