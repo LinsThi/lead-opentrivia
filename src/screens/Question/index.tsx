@@ -4,7 +4,6 @@ import { ThemeContext } from 'styled-components/native';
 
 import { NewText } from '~/components/Text';
 
-import type { QuestionsProps } from './mock';
 import Questions from './mock';
 
 import * as S from './styles';
@@ -12,6 +11,7 @@ import * as S from './styles';
 export function Question() {
   const { Colors } = useContext(ThemeContext);
   const navigation = useNavigation();
+
   const [numberQuestion, setNumberQuestion] = useState(0);
   const [questionCurrent, setQuestionCurrent] = useState(
     Questions[numberQuestion],
