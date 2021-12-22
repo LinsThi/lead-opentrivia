@@ -17,8 +17,6 @@ export function Result() {
 
   useEffect(() => {
     navigation.setOptions({
-      iconLeftType: 'antDesign',
-      iconLeftName: 'arrowleft',
       title: 'Resultado final',
     });
   }, [navigation]);

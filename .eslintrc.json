@@ -29,6 +29,7 @@
     "rules": {
       "prettier/prettier": ["error", { "endOfLine": "crlf" }],
       "react/function-component-definition": "off",
+      "no-plusplus": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "@typescript-eslint/no-var-requires": "warn",

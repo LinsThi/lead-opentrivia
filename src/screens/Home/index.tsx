@@ -37,14 +37,14 @@ export function Home() {
     setListData(organizeList(categoryListThemes));
   }, [categoryListThemes]);
 
-  const handleSelectCategory = useCallback(
-    (idCategory: number) => {
-      setCategorySelected(idCategory);
-      dispatch(getQuestionQuizAction(categorySelected, 'easy'));
-      // navigation.navigate(QUESTION_SCREEN);
-    },
-    [categorySelected, dispatch, navigation],
-  );
+  const handleSelectCategory = useCallback((idCategory: number) => {
+    setCategorySelected(idCategory);
+  }, []);
+
+  useEffect(() => {
+    dispatch(getQuestionQuizAction(categorySelected, 'easy'));
+    navigation.navigate(QUESTION_SCREEN);
+  }, [dispatch, categorySelected, navigation]);
 
   function renderCategory({ item }: any) {
     return (

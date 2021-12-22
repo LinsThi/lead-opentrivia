@@ -1,14 +1,24 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
 
 import { NewText } from '~/components/Text';
 
+import type { AplicationState } from '~/@types/Entity/AplicationState';
+import { RESULT_SCREEN } from '~/constants/routes';
+import type { OptionProps } from '~/dtos/arrayoption';
+
 import Questions from './mock';
+import { generateOptions } from './utils';
 
 import * as S from './styles';
 
 export function Question() {
+  const { questionListQuiz } = useSelector(
+    (state: AplicationState) => state.question,
+  );
+
   const { Colors } = useContext(ThemeContext);
   const navigation = useNavigation();
 
@@ -16,30 +26,45 @@ export function Question() {
   const [questionCurrent, setQuestionCurrent] = useState(
     Questions[numberQuestion],
   );
+  const [optionsQuestion, setOptionsQuestion] = useState<OptionProps[]>([]);
   const [optionSelected, setOptionSelected] = useState('');
+  const [questionsCorrected, setQuestionsCorrected] = useState(0);
 
   const handleSelectedOption = useCallback((option: string) => {
     setOptionSelected(option);
   }, []);
 
   const handleNextQuestion = useCallback(() => {
+    if (optionSelected === questionListQuiz[numberQuestion].correct_answer) {
+      setQuestionsCorrected(questionsCorrected + 1);
+    }
     setNumberQuestion(numberQuestion + 1);
-  }, [numberQuestion]);
-
-  const handlePreviousQuestion = useCallback(() => {
-    setNumberQuestion(numberQuestion - 1);
-  }, [numberQuestion]);
+  }, [optionSelected, questionListQuiz, questionsCorrected, numberQuestion]);
 
   const handleSendQuizz = useCallback(() => {
-    console.log('Finalizando Quizz');
-  }, []);
+    if (optionSelected === questionListQuiz[numberQuestion].correct_answer) {
+      setQuestionsCorrected(questionsCorrected + 1);
+    }
+    navigation.navigate(RESULT_SCREEN);
+  }, [
+    optionSelected,
+    questionListQuiz,
+    questionsCorrected,
+    numberQuestion,
+    navigation,
+  ]);
 
   useEffect(() => {
-    setQuestionCurrent(Questions[numberQuestion]);
+    setQuestionCurrent(questionListQuiz[numberQuestion]);
+
     navigation.setOptions({
       title: `Questão ${numberQuestion + 1}`,
     });
-  }, [numberQuestion, navigation]);
+  }, [questionListQuiz, numberQuestion, navigation]);
+
+  useEffect(() => {
+    setOptionsQuestion(generateOptions(questionListQuiz, numberQuestion));
+  }, [numberQuestion, questionListQuiz]);
 
   return (
     <S.Container>
@@ -47,30 +72,30 @@ export function Question() {
         <S.ContainerAsk>
           <S.ContainerAskTitle>
             <NewText fontColor={Colors.QUESTION_COLOR}>
-              {questionCurrent.id}) {questionCurrent.question}
+              {numberQuestion + 1}) {questionCurrent.question}
             </NewText>
           </S.ContainerAskTitle>
         </S.ContainerAsk>
 
         <S.ContainerOptions>
-          {questionCurrent.options.map(currentQuestion => {
+          {optionsQuestion.map(currentOption => {
             return (
-              <S.ContainerOptionsMap key={currentQuestion.item}>
+              <S.ContainerOptionsMap key={currentOption.value}>
                 <NewText fontColor={Colors.QUESTION_COLOR}>
-                  {currentQuestion.item}){' '}
+                  {currentOption.item}){' '}
                 </NewText>
 
                 <S.ButtonOption
-                  onPress={() => handleSelectedOption(currentQuestion.value)}
+                  onPress={() => handleSelectedOption(currentOption.value)}
                 >
                   <NewText
                     fontColor={
-                      optionSelected === currentQuestion.value
+                      optionSelected === currentOption.value
                         ? Colors.OPTION_SELECTED_COLOR
                         : Colors.OPTION_NOT_SELECTED_COLOR
                     }
                   >
-                    {currentQuestion.value}
+                    {currentOption.value}
                   </NewText>
                 </S.ButtonOption>
               </S.ContainerOptionsMap>
@@ -81,19 +106,11 @@ export function Question() {
 
       <S.ContainerButtons>
         <S.ButtonNavigation
-          onPress={() => handlePreviousQuestion()}
-          disabled={numberQuestion === 0}
-          isDisabled={numberQuestion === 0}
-        >
-          <NewText>Anterior</NewText>
-        </S.ButtonNavigation>
-
-        <S.ButtonNavigation
           onPress={() =>
-            numberQuestion === 2 ? handleSendQuizz() : handleNextQuestion()
+            numberQuestion === 9 ? handleSendQuizz() : handleNextQuestion()
           }
         >
-          <NewText>{numberQuestion === 2 ? 'Finalizar' : 'Proxima'}</NewText>
+          <NewText>{numberQuestion === 9 ? 'Finalizar' : 'Proxima'}</NewText>
         </S.ButtonNavigation>
       </S.ContainerButtons>
     </S.Container>

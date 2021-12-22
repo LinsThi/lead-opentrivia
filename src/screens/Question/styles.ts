@@ -37,7 +37,7 @@ export const ContainerButtons = styled.View`
   padding: 12px 30px;
 
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const ButtonOption = styled.TouchableOpacity`
