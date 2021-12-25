@@ -4,7 +4,9 @@ import type { QuestionQuizState } from './types';
 import { QuestionQuizTypes } from './types';
 
 const INITIAL_STATE: QuestionQuizState = {
+  categoryId: 0,
   questionListQuiz: [],
+  questionListQuizOld: [],
   loadingQuestionQuiz: false,
   errorGetQuestion: false,
 };
@@ -18,6 +20,7 @@ const reducer: Reducer<QuestionQuizState> = (
       return {
         ...state,
         loadingQuestionQuiz: true,
+        categoryId: payload.idCategory,
       };
     case QuestionQuizTypes.GET_QUESTION_SUCCESS:
       return {
@@ -32,6 +35,11 @@ const reducer: Reducer<QuestionQuizState> = (
         questionListQuiz: [],
         loadingQuestionQuiz: false,
         errorGetQuestion: true,
+      };
+    case QuestionQuizTypes.SET_QUESTION_OLD:
+      return {
+        ...state,
+        questionListQuizOld: payload.questionListQuiz,
       };
     default:
       return state;

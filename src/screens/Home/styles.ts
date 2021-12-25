@@ -35,3 +35,5 @@ export const FlatCategoryList = styled.FlatList`
 export const ListCategory = styled.FlatList``;
 
 export const ButtonCategory = styled.TouchableOpacity``;
+
+export const Indicator = styled.ActivityIndicator``;

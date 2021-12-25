@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { PROFILE_SCREEN, RESULT_SCREEN } from '~/constants/routes';
+import { HOME_SCREEN, PROFILE_SCREEN, RESULT_SCREEN } from '~/constants/routes';
 import { logoutAction } from '~/store/ducks/user/action';
 
 import * as S from './styles';
@@ -23,8 +23,16 @@ export function Baseboard() {
     navigation.navigate(PROFILE_SCREEN);
   }, [navigation]);
 
+  const handleNavigateHome = useCallback(() => {
+    navigation.navigate(HOME_SCREEN);
+  }, [navigation]);
+
   return (
     <S.Container>
+      <S.ButtonIcon onPress={() => handleNavigateHome()}>
+        <S.IconPerfil iconType="materialCommunityIcons" name="home" />
+      </S.ButtonIcon>
+
       <S.ButtonIcon onPress={() => handleNavigateProfileUser()}>
         <S.IconPerfil iconType="font" name="user-circle-o" />
       </S.ButtonIcon>

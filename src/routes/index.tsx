@@ -70,7 +70,7 @@ export function RootStack() {
                   name={RESULT_SCREEN}
                   component={Result}
                   options={{
-                    header: props => <Header {...props} enableNavigation />,
+                    header: props => <Header {...props} />,
                   }}
                 />
               </Stack.Navigator>

@@ -37,7 +37,7 @@ export const ContainerButtons = styled.View`
   padding: 12px 30px;
 
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 export const ButtonOption = styled.TouchableOpacity`
@@ -56,3 +56,5 @@ export const ButtonNavigation = styled.TouchableOpacity<ButtonProps>`
   background: ${({ isDisabled, theme }) =>
     isDisabled ? theme.Colors.BUTTON_DISABLE_COLOR : theme.Colors.BUTTON_COLOR};
 `;
+
+export const Indicator = styled.ActivityIndicator``;
