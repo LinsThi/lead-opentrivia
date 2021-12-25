@@ -34,3 +34,22 @@ export const generateOptions = (
 
   return optionsCurrentQuestionFormatted;
 };
+
+export const verifyQuestionSequence = (
+  sequenceQuestion: number,
+  difficulty: string,
+) => {
+  const difficultyQuizz = ['easy', 'medium', 'hard'];
+  const difficultyPositionArray = difficultyQuizz.indexOf(difficulty);
+
+  if (sequenceQuestion === 3) {
+    if (difficultyPositionArray === 2) {
+      return difficultyQuizz[difficultyPositionArray];
+    }
+    return difficultyQuizz[difficultyPositionArray + 1];
+  }
+  if (difficultyPositionArray === 0) {
+    return difficultyQuizz[difficultyPositionArray];
+  }
+  return difficultyQuizz[difficultyPositionArray - 1];
+};

@@ -1,10 +1,13 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
 
 import { Baseboard } from '~/components/Baseboard';
 import { CircleProgress } from '~/components/CircleProgress';
 import { NewText } from '~/components/Text';
+
+import type { AplicationState } from '~/@types/Entity/AplicationState';
 
 import * as S from './styles';
 
@@ -12,14 +15,26 @@ export function Result() {
   const navigation = useNavigation();
   const { Colors } = useContext(ThemeContext);
 
-  const [quantityQuestion, setQuantityQuestion] = useState(7);
+  const { correctQuestionEasy, correctQuestionMedium, correctQuestionHard } =
+    useSelector((state: AplicationState) => state.userQuestions);
+
+  const [quantityQuestion, setQuantityQuestion] = useState(0);
   const [textCongrats, setTextCongrats] = useState('');
 
   useEffect(() => {
     navigation.setOptions({
       title: 'Resultado final',
     });
-  }, [navigation]);
+
+    setQuantityQuestion(
+      correctQuestionEasy + correctQuestionMedium + correctQuestionHard,
+    );
+  }, [
+    correctQuestionEasy,
+    correctQuestionMedium,
+    correctQuestionHard,
+    navigation,
+  ]);
 
   useEffect(() => {
     if (quantityQuestion >= 7) {
@@ -72,17 +87,20 @@ export function Result() {
         </S.ContainerResultQuantity>
 
         <S.ContainerGraph>
-          <CircleProgress difficulty="Fácil" percent={quantityQuestion * 10} />
+          <CircleProgress
+            difficulty="Fácil"
+            percent={correctQuestionEasy * 10}
+          />
 
           <CircleProgress
             difficulty="Médio"
-            percent={quantityQuestion * 10}
+            percent={correctQuestionMedium * 10}
             midCircle
           />
 
           <CircleProgress
             difficulty="Difícil"
-            percent={quantityQuestion * 10}
+            percent={correctQuestionHard * 10}
           />
         </S.ContainerGraph>
       </S.ContainerResult>

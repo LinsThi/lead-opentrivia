@@ -4,6 +4,7 @@ import type {
   GetQuestionQuizActionProps,
   GetQuestionQuizSuccessActionProps,
   GetQuestionQuizErrorActionProps,
+  SetQuestionListOldQuizProps,
 } from './types';
 import { QuestionQuizTypes } from './types';
 
@@ -22,3 +23,10 @@ export const getQuestionQuizSuccessAction = (
 
 export const getQuestionQuizErrorAction = (): GetQuestionQuizErrorActionProps =>
   action(QuestionQuizTypes.GET_QUESTION_ERROR);
+
+export const setQuestionListOldQuizAction = (
+  questionListQuiz: any[],
+): SetQuestionListOldQuizProps =>
+  action(QuestionQuizTypes.SET_QUESTION_OLD, {
+    questionListQuiz,
+  });
