@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
 
@@ -75,17 +76,44 @@ export function Question() {
     [questionListQuiz, questionsCorrectedSequence, dispatch],
   );
 
+  const showToast = useCallback(
+    (type: string) => {
+      if (type === 'success') {
+        Toast.show({
+          type: 'success',
+          text1: 'Parabéns',
+          text2: 'Você acertou a questão',
+          position: 'bottom',
+          bottomOffset: 60,
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'Poxa, que pena',
+          text2: `Você errou a questão, a resposta correta seria: ${questionListQuiz[numberQuestion].correct_answer}`,
+          position: 'bottom',
+          bottomOffset: 60,
+        });
+      }
+    },
+    [numberQuestion, questionListQuiz],
+  );
+
   const handleNextQuestion = useCallback(() => {
     if (optionSelected === questionListQuiz[numberQuestion].correct_answer) {
+      showToast('success');
+
       if (questionsCorrectedSequence < 0) {
         setQuestionsCorrectedSequence(1);
       } else {
         setQuestionsCorrectedSequence(questionsCorrectedSequence + 1);
       }
     } else if (questionsCorrectedSequence > 0) {
+      showToast('error');
       incrementCorrectQuestions();
       setQuestionsCorrectedSequence(0);
     } else {
+      showToast('error');
       setQuestionsCorrectedSequence(questionsCorrectedSequence - 1);
     }
     setNumberQuestion(numberQuestion + 1);
@@ -95,6 +123,7 @@ export function Question() {
     questionListQuiz,
     questionsCorrectedSequence,
     numberQuestion,
+    showToast,
   ]);
 
   const handleSendQuizz = useCallback(() => {
@@ -165,6 +194,7 @@ export function Question() {
 
   return (
     <S.Container>
+      <Toast />
       {loadingQuestionQuiz || !questionCurrent ? (
         <S.Indicator size="large" color={Colors.ICON_COLOR_INPUT} />
       ) : (
