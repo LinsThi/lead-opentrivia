@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeContext } from 'styled-components/native';
 
@@ -59,6 +60,7 @@ export function Home() {
 
   return (
     <S.Container>
+      <Toast />
       {loadingCategoryThemes ? (
         <S.Indicator
           size="large"
