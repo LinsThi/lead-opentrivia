@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
+import { decode } from 'html-entities';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
@@ -205,7 +206,7 @@ export function Question() {
             <S.ContainerAsk>
               <S.ContainerAskTitle>
                 <NewText fontColor={Colors.QUESTION_COLOR}>
-                  {numberQuestion + 1}) {questionCurrent.question}
+                  {numberQuestion + 1}) {decode(questionCurrent.question)}
                 </NewText>
               </S.ContainerAskTitle>
             </S.ContainerAsk>
@@ -228,7 +229,7 @@ export function Question() {
                             : Colors.OPTION_NOT_SELECTED_COLOR
                         }
                       >
-                        {currentOption.value}
+                        {decode(currentOption.value)}
                       </NewText>
                     </S.ButtonOption>
                   </S.ContainerOptionsMap>
