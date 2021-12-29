@@ -152,6 +152,8 @@ export function Question() {
     }
 
     navigation.setOptions({
+      iconLeftType: 'antDesign',
+      iconLeftName: 'closecircleo',
       title: `Questão ${numberQuestion + 1}`,
     });
   }, [questionListQuiz, numberQuestion, navigation, loadingQuestionQuiz]);
