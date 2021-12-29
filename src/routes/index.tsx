@@ -62,7 +62,7 @@ export function RootStack() {
                   name={QUESTION_SCREEN}
                   component={Question}
                   options={{
-                    header: props => <Header {...props} />,
+                    header: props => <Header {...props} enableNavigation />,
                   }}
                 />
 
